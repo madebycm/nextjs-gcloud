@@ -1,7 +1,9 @@
 Outlines how to prebuild, upload to gcr.io and deploy Next.js container on gcloud
 
-`npx create-next-app@latest`
-`deploy.sh`
+```
+npx create-next-app@latest
+deploy.sh
+```
 
 Set config vars + resource limits in main deploy entrypoint:
 ```
