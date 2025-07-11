@@ -32,10 +32,10 @@ if [ "$1" == "dev" ]; then
   echo "Container will be accessible at http://localhost:8080"
   echo "Press Ctrl+C to stop"
 
-  # Mount gcloud credentials for local development
+  # Mount gcloud ADC credentials for local development (industry standard minimal approach)
   docker run --rm -p 8080:8080 \
-    -v ~/.config/gcloud:/home/nextjs/.config/gcloud:ro \
-    -e GOOGLE_APPLICATION_CREDENTIALS=/home/nextjs/.config/gcloud/application_default_credentials.json \
+    -v ~/.config/gcloud/application_default_credentials.json:/tmp/adc.json:ro \
+    -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/adc.json \
     ${SERVICE_NAME}-dev
   exit 0
 fi
