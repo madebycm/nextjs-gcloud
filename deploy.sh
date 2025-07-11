@@ -18,8 +18,13 @@ SERVICE_NAME="helloworld"
 REGION="us-east1"
 IMAGE_NAME="gcr.io/${PROJECT_ID}/${SERVICE_NAME}"
 
-echo "🔨 Building Docker image locally..."
-docker build --platform linux/amd64 -t ${IMAGE_NAME} .
+# Resource limits
+MEMORY="1Gi"
+CPU="1"
+MAX_INSTANCES="10"
+
+echo "🔨 Building Docker image locally with BuildKit..."
+DOCKER_BUILDKIT=1 docker build --platform linux/amd64 -t ${IMAGE_NAME} .
 
 echo "📤 Pushing image to Container Registry..."
 docker push ${IMAGE_NAME}
@@ -30,7 +35,10 @@ gcloud run deploy ${SERVICE_NAME} \
   --region ${REGION} \
   --project ${PROJECT_ID} \
   --platform managed \
-  --allow-unauthenticated
+  --allow-unauthenticated \
+  --memory ${MEMORY} \
+  --cpu ${CPU} \
+  --max-instances ${MAX_INSTANCES}
 
 echo "✅ Deployment complete!"
 
