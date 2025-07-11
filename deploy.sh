@@ -23,6 +23,19 @@ MEMORY="1Gi"
 CPU="1"
 MAX_INSTANCES="10"
 
+# Local dev mode
+if [ "$1" == "dev" ]; then
+  echo "🔨 Building Docker image for local development..."
+  DOCKER_BUILDKIT=1 docker build -t ${SERVICE_NAME}-dev .
+
+  echo "🏃 Running container locally on port 8080..."
+  echo "Container will be accessible at http://localhost:8080"
+  echo "Press Ctrl+C to stop"
+
+  docker run --rm -p 8080:8080 ${SERVICE_NAME}-dev
+  exit 0
+fi
+
 echo "🔨 Building Docker image locally with BuildKit..."
 DOCKER_BUILDKIT=1 docker build --platform linux/amd64 -t ${IMAGE_NAME} .
 
