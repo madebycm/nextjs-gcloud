@@ -3,7 +3,7 @@ Outlines how to prebuild, upload to gcr.io and deploy Next.js container on gclou
 `npx create-next-app@latest`
 `deploy.sh`
 
-Set config vars + resource limits in deploy.sh
+Set config vars + resource limits in main deploy entrypoint:
 ```
 # Configuration
 PROJECT_ID="madebycm-omegaproject"
