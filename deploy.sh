@@ -22,6 +22,7 @@ IMAGE_NAME="gcr.io/${PROJECT_ID}/${SERVICE_NAME}"
 MEMORY="1Gi"
 CPU="1"
 MAX_INSTANCES="10"
+TIMEOUT="30"
 
 # Local dev mode
 if [ "$1" == "dev" ]; then
@@ -55,7 +56,8 @@ gcloud run deploy ${SERVICE_NAME} \
   --allow-unauthenticated \
   --memory ${MEMORY} \
   --cpu ${CPU} \
-  --max-instances ${MAX_INSTANCES}
+  --max-instances ${MAX_INSTANCES} \
+  --timeout ${TIMEOUT}
 
 echo "✅ Deployment complete!"
 
