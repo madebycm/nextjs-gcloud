@@ -26,7 +26,8 @@ TIMEOUT="30"
 
 # Local dev mode
 if [ "$1" == "dev" ]; then
-  echo "🔨 Building Docker image for local development..."
+  echo "🔨 Building Docker image for local development (native platform)..."
+  # Build for native platform in dev mode for better performance
   DOCKER_BUILDKIT=1 docker build -t ${SERVICE_NAME}-dev .
 
   echo "🏃 Running container locally on port 8080..."
